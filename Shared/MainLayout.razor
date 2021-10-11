@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+@inject IAuthServices AuthServices
+@inject NavigationManager NavigationManager
+
+@if (AuthServices.users != null)
+{
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="navbar-nav">
+            <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link">Home</NavLink>
+            <NavLink href="logout" class="nav-item nav-link">Logout</NavLink>
+        </div>
+    </nav>
+}
+
+<div class="container">
+    @Body
+</div>
