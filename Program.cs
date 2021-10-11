@@ -24,6 +24,8 @@ namespace WebClientCitas
             builder.Services
                 .AddScoped<IAuthServices, AuthServices>();
 
+            builder.Services.AddAuthenticationCore();
+
             var host = builder.Build();
 
             var authenticationService = host.Services.GetRequiredService<IAuthServices>();

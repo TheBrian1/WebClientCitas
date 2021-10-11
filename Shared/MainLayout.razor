@@ -5,12 +5,21 @@
 
 @if (AuthServices.users != null)
 {
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <div class="navbar-nav">
-            <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link">Home</NavLink>
-            <NavLink href="logout" class="nav-item nav-link">Logout</NavLink>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link"><span class="oi oi-home"></span> Home</NavLink>
+        <NavLink href="RegistroCitas" class="nav-item nav-link"><span class="oi oi-list-rich"></span> Registrar Cita</NavLink>
+        <NavLink href="logout" class="nav-item nav-link"><span class="oi oi-account-logout"></span> Logout</NavLink>
+
+    </div>
+
+    <div class="navbar-nav align-content-end">
+        <NavLink class="nav-item nav-link">
+            <span class="oi oi-person"></span>
+            @AuthServices.users.Username
+        </NavLink>
+    </div>
+</nav>
 }
 
 <div class="container">

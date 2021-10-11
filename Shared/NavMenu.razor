@@ -1,7 +1,16 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@inject IAuthServices AuthenticationService
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">WebClientCitas</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="top-row pl-5 navbar-dark">
+    <a class="navbar-brand">@AuthenticationService.users.Username</a>
+    <button class="navbar-toggler">
+        <span class="oi-account-login"></span>
     </button>
 </div>
 

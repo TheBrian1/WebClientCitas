@@ -23,5 +23,20 @@ namespace WebClientCitas.Models
         [Required(ErrorMessage = "Este campo no puede estar vacio")]
         public DateTime Fecha_Cita { get; set; }
         public string Username { get; set; }
+    
+        public Citas()
+        {
+            CitaId = 0;
+            Nombres = string.Empty;
+            Apellidos = string.Empty;
+            Telefono = string.Empty;
+            Descripcion = string.Empty;
+            Direccion = string.Empty;
+            Fecha_Cita = DateTime.Now;
+            Username = string.Empty;
+        }
+    
     }
+
+    
 }

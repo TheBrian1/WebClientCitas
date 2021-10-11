@@ -77,11 +77,12 @@
             if (paso)
             {
                 NavigationManager.NavigateTo("/");
+                toast.ShowSuccess("Ha iniciado sesión correctamente");
             }
             else
             {
                 NavigationManager.NavigateTo("returnUrl");
-                toast.ShowWarning("Ingrese sus datos correctamente");
+                toast.ShowError("Ingrese sus datos correctamente");
             }
 
 
