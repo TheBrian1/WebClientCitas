@@ -4,34 +4,48 @@
 @inject IAuthServices AuthenticationService
 @inject NavigationManager NavigationManager
 
-<div class="col-md-6 offset-md-3 mt-5">
-    <div class="card">
-        <h4 class="card-header">Blazor WebAssembly JWT Login Example</h4>
-        <div class="card-body">
+<div style="color:blueviolet" class="container shadow-lg p-3 rb-5 bg-white border-dark rounded col-md-4">
+    <div class="card card-signin bg-light"><span style="color:blueviolet" class="border"></span>
+        <div class="card-header text-center">
+            <h3>Login Citas</h3>
+        </div>
+        <div class="card-body text-center">
             <EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <div class="form-group">
-                    <label>Username</label>
-                    <InputText @bind-Value="model.Username" class="form-control" />
+                    <label>Nombre de Usuario: </label>
+                    <InputText @bind-Value="model.Username" class="form-control text-center" />
                     <ValidationMessage For="@(() => model.Username)" />
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <InputText @bind-Value="model.Password" type="password" class="form-control" />
+                    <label>Contraseña: </label>
+                    <InputText @bind-Value="model.Password" type="password" class="form-control text-center" />
                     <ValidationMessage For="@(() => model.Password)" />
                 </div>
-                <button class="btn btn-primary">
+
+                @if (!string.IsNullOrEmpty(error))
+                {
+                    <div class="alert alert-danger mt-3 mb-0">@error</div>
+                }
+            </EditForm>
+        </div>
+        <div class="card-footer">
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                @*<div class="btn-group" role="group" aria-label="First group">
+                    <button style="color: white" class=" text-center btn-primary">Login<span class="oi oi-account-login"></span></button>
+                </div>*@
+                <button class="btn btn-primary" @onclick="HandleValidSubmit">
                     @if (loading)
                     {
                         <span class="spinner-border spinner-border-sm mr-1"></span>
                     }
                     Login
                 </button>
-                @if (!string.IsNullOrEmpty(error))
-                {
-                    <div class="alert alert-danger mt-3 mb-0">@error</div>
-                }
-            </EditForm>
+                <div class="btn-group">
+                    <a class="text-center btn btn-secondary" href="RegistroCliente">Register</a>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

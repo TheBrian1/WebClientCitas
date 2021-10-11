@@ -1,0 +1,102 @@
+﻿@page "/RegistroCliente"
+@page "/RegistroCliente/{UserId:int}"
+
+@inject NavigationManager NavigationManager
+
+@using Models
+
+<EditForm Model="user" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div style="color: blueviolet">
+        <div style="color:blueviolet" class="container shadow-lg p-3 rb-5 bg-light border-dark col-md-6">
+            <div class="card bg-light">
+                <div class="card-header text-center">
+                    <h3>Registro de Usuarios</h3>
+                </div>
+
+                <div class="card-body text-center">
+
+                    <div class="form-group">
+                        <label>Nombre </label>
+                        <InputText @bind-Value="user.Nombres" class="form-control" />
+                        <ValidationMessage For="@(() => user.Nombres)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <InputText @bind-Value="user.Apellidos" class="form-control" />
+                        <ValidationMessage For="@(() => user.Apellidos)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nombre de Usuario</label>
+                        <InputText @bind-Value="user.Username" class="form-control" />
+                        <ValidationMessage For="@(() => user.Username)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" @bind-value="user.Password" class="form-control" />
+                        <ValidationMessage For="@(() => user.Password)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Verificar Contraseña</label>
+                        <input type="password" @bind-value="Password" class="form-control" />
+                    </div>
+
+
+
+                </div>
+                <!--Buttons--->
+                <div class="card-footer">
+                    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-outline-secondary" @onclick="Nuevo">Nuevo</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-outline-success">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code{
+    private R_User user = new R_User();
+
+    [Parameter] public int UserId { get; set; }
+
+    private string Password { get; set; }
+
+    HttpClient client = new HttpClient();
+
+    protected override void OnInitialized()
+    {
+        Nuevo();
+    }
+
+    private void Nuevo()
+    {
+        user = new R_User();
+        Password = string.Empty;
+    }
+
+    private async Task Guardar()
+    {
+        client = new HttpClient();
+
+        client.BaseAddress = new Uri($"http://25.4.175.48:50000/api/auth/Users/Registrarse");
+        var postTask = await client.PostAsJsonAsync<R_User>("Registrarse", user);
+
+        if (postTask.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/Login");
+        }
+    }
+}
+
