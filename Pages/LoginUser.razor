@@ -3,6 +3,8 @@
 
 @inject IAuthServices AuthenticationService
 @inject NavigationManager NavigationManager
+@inject IToastService toast
+
 
 <div class="col-md-6 offset-md-3 mt-5">
     <div class="card">
@@ -47,6 +49,7 @@
         if (AuthenticationService.users != null)
         {
             NavigationManager.NavigateTo("");
+            toast.ShowInfo("Usted ya esta Logeado en el sistema");
         }
     }
 
@@ -58,9 +61,16 @@
             bool paso = await AuthenticationService.Authentication(model);
 
             if (paso)
+            {
                 NavigationManager.NavigateTo("/");
+            }
             else
+            {
                 NavigationManager.NavigateTo("returnUrl");
+                toast.ShowWarning("Ingrese sus datos correctamente");
+            }
+
+
 
         }
         catch (Exception ex)

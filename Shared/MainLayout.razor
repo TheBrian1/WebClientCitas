@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @inject IAuthServices AuthServices
 @inject NavigationManager NavigationManager
+@using Blazored.Toast.Configuration
 
 @if (AuthServices.users != null)
 {
@@ -15,3 +16,10 @@
 <div class="container">
     @Body
 </div>
+<BlazoredToasts Position="ToastPosition.BottomRight"
+                Timeout="10"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa fa-thumbs-up"
+                ErrorIcon="fa fa-bug"
+                />
